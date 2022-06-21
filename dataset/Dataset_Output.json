@@ -1,0 +1,20 @@
+{
+	"name": "Dataset_Output",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "LKinputblob",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "Binary",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": "Test_Data.txt",
+				"folderPath": "Output",
+				"container": "adfdemo"
+			}
+		}
+	},
+	"type": "Microsoft.Synapse/workspaces/datasets"
+}

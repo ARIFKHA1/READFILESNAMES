@@ -1,0 +1,29 @@
+{
+	"name": "DynamicSQL",
+	"type": "Microsoft.Synapse/workspaces/linkedservices",
+	"properties": {
+		"parameters": {
+			"DbName": {
+				"type": "string"
+			},
+			"Servername": {
+				"type": "string"
+			},
+			"username": {
+				"type": "string"
+			},
+			"Password": {
+				"type": "string"
+			}
+		},
+		"annotations": [],
+		"type": "SqlServer",
+		"typeProperties": {
+			"connectionString": "Integrated Security=False;Data Source=@{linkedService().Servername};Initial Catalog=@{linkedService().DbName};User ID=@{linkedService().username};Password=@{linkedService().Password}"
+		},
+		"connectVia": {
+			"referenceName": "AutoResolveIntegrationRuntime",
+			"type": "IntegrationRuntimeReference"
+		}
+	}
+}

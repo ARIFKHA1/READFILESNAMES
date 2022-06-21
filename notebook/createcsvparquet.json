@@ -1,0 +1,85 @@
+{
+	"name": "createcsvparquet",
+	"properties": {
+		"nbformat": 4,
+		"nbformat_minor": 2,
+		"bigDataPool": {
+			"referenceName": "SparkpoolDemo",
+			"type": "BigDataPoolReference"
+		},
+		"sessionProperties": {
+			"driverMemory": "28g",
+			"driverCores": 4,
+			"executorMemory": "28g",
+			"executorCores": 4,
+			"numExecutors": 2,
+			"conf": {
+				"spark.dynamicAllocation.enabled": "false",
+				"spark.dynamicAllocation.minExecutors": "2",
+				"spark.dynamicAllocation.maxExecutors": "2",
+				"spark.autotune.trackingId": "97520ad0-775d-4d64-b511-69c3d7c07c98"
+			}
+		},
+		"metadata": {
+			"saveOutput": true,
+			"synapse_widget": {
+				"version": "0.1"
+			},
+			"enableDebugMode": false,
+			"kernelspec": {
+				"name": "synapse_pyspark",
+				"display_name": "Synapse PySpark"
+			},
+			"language_info": {
+				"name": "python"
+			},
+			"a365ComputeOptions": {
+				"id": "/subscriptions/2ac38f73-a09f-4c0b-ad58-d53c214e26de/resourceGroups/ArifRG/providers/Microsoft.Synapse/workspaces/arifsynapse/bigDataPools/SparkpoolDemo",
+				"name": "SparkpoolDemo",
+				"type": "Spark",
+				"endpoint": "https://arifsynapse.dev.azuresynapse.net/livyApi/versions/2019-11-01-preview/sparkPools/SparkpoolDemo",
+				"auth": {
+					"type": "AAD",
+					"authResource": "https://dev.azuresynapse.net"
+				},
+				"sparkVersion": "3.1",
+				"nodeCount": 10,
+				"cores": 4,
+				"memory": 28,
+				"extraHeader": null
+			},
+			"sessionKeepAliveTimeout": 30
+		},
+		"cells": [
+			{
+				"cell_type": "code",
+				"source": [
+					"df = spark.sql('Select * from nyctaxi.passengercount')"
+				],
+				"attachments": null,
+				"execution_count": 2
+			},
+			{
+				"cell_type": "code",
+				"metadata": {
+					"jupyter": {
+						"source_hidden": false,
+						"outputs_hidden": false
+					},
+					"nteract": {
+						"transient": {
+							"deleting": false
+						}
+					}
+				},
+				"source": [
+					"df1 = df.repartition(1)\r\n",
+					"df1.write.mode('Overwrite').csv('/nyctaxi/csv')\r\n",
+					"df1.write.mode('Overwrite').parquet('/nyctaxi/parquet')"
+				],
+				"attachments": null,
+				"execution_count": 3
+			}
+		]
+	}
+}

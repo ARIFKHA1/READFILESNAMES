@@ -1,0 +1,34 @@
+{
+	"name": "Dynamicsqldataset",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "DynamicSQL",
+			"type": "LinkedServiceReference",
+			"parameters": {
+				"DbName": {
+					"value": "@dataset().DbName",
+					"type": "Expression"
+				}
+			}
+		},
+		"parameters": {
+			"tablename": {
+				"type": "string"
+			},
+			"DbName": {
+				"type": "string"
+			}
+		},
+		"annotations": [],
+		"type": "SqlServerTable",
+		"schema": [],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": {
+				"value": "@dataset().tablename",
+				"type": "Expression"
+			}
+		}
+	},
+	"type": "Microsoft.Synapse/workspaces/datasets"
+}
