@@ -1,5 +1,5 @@
 {
-	"name": "Readfilenmes",
+	"name": "Deletefile",
 	"properties": {
 		"activities": [
 			{
@@ -15,7 +15,21 @@
 				},
 				"userProperties": [],
 				"typeProperties": {
-					"fieldList": []
+					"dataset": {
+						"referenceName": "Inputdatsetmain",
+						"type": "DatasetReference"
+					},
+					"fieldList": [
+						"childItems"
+					],
+					"storeSettings": {
+						"type": "AzureBlobStorageReadSettings",
+						"modifiedDatetimeStart": "2022-06-22T00:00:00.000Z",
+						"enablePartitionDiscovery": false
+					},
+					"formatSettings": {
+						"type": "BinaryReadSettings"
+					}
 				}
 			}
 		],
