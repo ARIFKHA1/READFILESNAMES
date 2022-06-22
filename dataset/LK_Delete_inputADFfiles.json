@@ -1,5 +1,5 @@
 {
-	"name": "Inputdatsetmain",
+	"name": "LK_Delete_inputADFfiles",
 	"properties": {
 		"linkedServiceName": {
 			"referenceName": "LKinputblob",
