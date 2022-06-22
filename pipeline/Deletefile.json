@@ -37,8 +37,8 @@
 				}
 			},
 			{
-				"name": "Delete1",
-				"type": "Delete",
+				"name": "ForEach1",
+				"type": "ForEach",
 				"dependsOn": [
 					{
 						"activity": "Get Metadata1",
@@ -47,31 +47,53 @@
 						]
 					}
 				],
-				"policy": {
-					"timeout": "7.00:00:00",
-					"retry": 0,
-					"retryIntervalInSeconds": 30,
-					"secureOutput": false,
-					"secureInput": false
-				},
 				"userProperties": [],
 				"typeProperties": {
-					"dataset": {
-						"referenceName": "LK_Delete_inputADFfiles",
-						"type": "DatasetReference"
+					"items": {
+						"value": "@activity('Get Metadata1').output",
+						"type": "Expression"
 					},
-					"logStorageSettings": {
-						"linkedServiceName": {
-							"referenceName": "LKinputblob",
-							"type": "LinkedServiceReference"
+					"isSequential": true,
+					"activities": [
+						{
+							"name": "Delete1",
+							"type": "Delete",
+							"dependsOn": [],
+							"policy": {
+								"timeout": "7.00:00:00",
+								"retry": 0,
+								"retryIntervalInSeconds": 30,
+								"secureOutput": false,
+								"secureInput": false
+							},
+							"userProperties": [],
+							"typeProperties": {
+								"dataset": {
+									"referenceName": "LK_Delete_inputADFfiles",
+									"type": "DatasetReference",
+									"parameters": {
+										"Filename": {
+											"value": "@item().Name",
+											"type": "Expression"
+										}
+									}
+								},
+								"logStorageSettings": {
+									"linkedServiceName": {
+										"referenceName": "LKinputblob",
+										"type": "LinkedServiceReference"
+									},
+									"path": "log"
+								},
+								"enableLogging": true,
+								"storeSettings": {
+									"type": "AzureBlobStorageReadSettings",
+									"recursive": true,
+									"enablePartitionDiscovery": false
+								}
+							}
 						}
-					},
-					"enableLogging": true,
-					"storeSettings": {
-						"type": "AzureBlobStorageReadSettings",
-						"recursive": true,
-						"enablePartitionDiscovery": false
-					}
+					]
 				}
 			}
 		],
